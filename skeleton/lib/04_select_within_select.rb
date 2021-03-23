@@ -136,12 +136,18 @@ def sparse_continents
     countries
   WHERE
     continent IN(
-          SELECT
+          SELECT DISTINCT
             continent
           FROM
             countries
           WHERE
-            population < 25000000
+            country IN (
+              SELECT
+                country 
+              FROM
+              countries 
+              WHERE population < 25000000
+            )
         ); 
   SQL
 end
